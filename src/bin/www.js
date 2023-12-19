@@ -8,7 +8,7 @@ import 'regenerator-runtime/runtime';
 
 import http from 'http';
 import app from '../app';
-import SocketManager from '../app/helpers/socket-manager';
+// import SocketManager from '../app/helpers/socket-manager';
 
 /**
  * Normalize a port into a number, string, or false.
@@ -41,8 +41,8 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
-const socketManager = new SocketManager(null, server);
-app.set('io', socketManager.io);
+// const socketManager = new SocketManager(null, server);
+// app.set('io', socketManager.io);
 
 /**
  * Event listener for HTTP server "error" event.
