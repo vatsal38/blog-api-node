@@ -11,7 +11,6 @@ class Controller {
   }
 
   async getAll(req, res) {
-    // console.log(req.query);
     const response = await this.service.getAll(req.query);
     if (response.error) return res.status(response.statusCode).send(response);
     return res.status(response.statusCode).send(response);

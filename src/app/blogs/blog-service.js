@@ -51,7 +51,7 @@ class BlogService extends Service {
         data: items,
       };
     } catch (errors) {
-      console.error(errors); // Log the error for debugging
+      console.error(errors);
       return {
         error: true,
         statusCode: 500,

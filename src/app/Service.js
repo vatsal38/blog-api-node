@@ -13,7 +13,6 @@ class Service {
 
   async getAll(query) {
     let { skip, limit } = query;
-    // console.log(query);
     skip = skip ? Number(skip) : 0;
     limit = limit ? Number(limit) : 10;
 
@@ -21,8 +20,6 @@ class Service {
     delete query.skip;
     // eslint-disable-next-line no-param-reassign
     delete query.limit;
-    // console.log(skip);
-    // console.log(limit);
     // eslint-disable-next-line no-underscore-dangle
     let id = query._id;
     if (id) {
@@ -49,7 +46,6 @@ class Service {
         total,
       };
     } catch (errors) {
-      // console.error(errors);
       return {
         error: true,
         statusCode: 500,

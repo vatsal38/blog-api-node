@@ -11,5 +11,4 @@ export default (router) => {
   router.get('/api/blogs', auth, BlogController.getAllBlogs);
   router.get('/api/:userId/blogs', auth, BlogController.getBlogsByUserId);
   router.get('/api/blogs/:blogId', auth, BlogController.getBlogsByBlogId);
-  // Add other routes as needed
 };

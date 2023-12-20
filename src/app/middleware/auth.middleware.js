@@ -5,7 +5,6 @@ export default (req, res, next) => {
   try {
     if (req.headers.authorization) {
       const token = req.headers.authorization.replace('Bearer ', '');
-      // console.log('token',token);
       try {
         const decoded = verify(token, process.env.JWT_SECRET);
         req.user = decoded;

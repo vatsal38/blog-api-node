@@ -15,7 +15,7 @@ class Blogs {
         },
         user: {
           type: Schema.Types.ObjectId,
-          ref: 'users', // Reference the User model
+          ref: 'users',
           required: [true, 'User ID is required.'],
         },
       },

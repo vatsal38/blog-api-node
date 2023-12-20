@@ -6,5 +6,4 @@ export default (router) => {
   router.get('/api/user/:id', auth, UserController.get);
   router.get('/api/users', auth, UserController.getAll);
   router.post('/api/user/create', UserController.addUser);
-  // router.put('/api/user/:id', auth, UserController.update);
 };
