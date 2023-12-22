@@ -2,8 +2,7 @@ import multer from 'multer';
 import auth from '../middleware/auth.middleware';
 import BlogController from './blog-controller';
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = multer();
 
 export default (router) => {
   router.post(
