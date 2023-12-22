@@ -29,7 +29,7 @@ class BlogController extends Controller {
       if (req.file) {
         const imageBuffer = req.file.buffer;
         const base64Image = imageBuffer.toString('base64');
-        // blogData.image = `data:image/jpeg;base64,${base64Image}`;
+        blogData.image = `data:image/jpeg;base64,${base64Image}`;
         blogData.image = base64Image;
       }
 
