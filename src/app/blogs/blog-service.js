@@ -20,14 +20,11 @@ class BlogService extends Service {
           'lastName',
           'phoneNumber',
         ]);
-      const blogData = items.map((blog) => ({
-        ...blog._doc,
-        image: blog.image ? `data:image/jpeg;base64,${blog.image}` : null,
-      }));
+
       return {
         error: false,
         statusCode: 200,
-        data: blogData,
+        data: items,
       };
     } catch (errors) {
       return {
@@ -49,14 +46,11 @@ class BlogService extends Service {
           'lastName',
           'phoneNumber',
         ]);
-      const blogData = items.map((blog) => ({
-        ...blog._doc,
-        image: blog.image ? `data:image/jpeg;base64,${blog.image}` : null,
-      }));
+
       return {
         error: false,
         statusCode: 200,
-        data: blogData,
+        data: items,
       };
     } catch (errors) {
       console.error(errors);
@@ -80,15 +74,10 @@ class BlogService extends Service {
           'phoneNumber',
         ]);
 
-      const blogData = {
-        ...item._doc,
-        image: item.image ? `data:image/jpeg;base64,${item.image}` : null,
-      };
-
       return {
         error: false,
         statusCode: 200,
-        data: blogData,
+        data: item,
       };
     } catch (errors) {
       console.error(errors);
@@ -102,8 +91,16 @@ class BlogService extends Service {
 
   async getBlogsByUserIdAndBlogId(userId, blogId) {
     try {
-      const item = await this.model.findOne({ _id: blogId, user: userId });
-      console.log('item', item);
+      const item = await this.model
+        .findOne({ _id: blogId, user: userId })
+        .populate('user', [
+          '_id',
+          'username',
+          'firstName',
+          'lastName',
+          'phoneNumber',
+        ]);
+
       if (!item) {
         return {
           error: true,
@@ -112,15 +109,10 @@ class BlogService extends Service {
         };
       }
 
-      const blogData = {
-        ...item._doc,
-        image: item.image ? `data:image/jpeg;base64,${item.image}` : null,
-      };
-
       return {
         error: false,
         statusCode: 200,
-        data: blogData,
+        data: item,
       };
     } catch (errors) {
       return {

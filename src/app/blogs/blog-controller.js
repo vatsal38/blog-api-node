@@ -18,18 +18,22 @@ class BlogController extends Controller {
 
   async createBlog(req, res) {
     try {
+      console.log('req.body', req.body);
       const userId = req.user.id;
-      const image = req.file ? req.file.buffer.toString('base64') : null;
+
       const blogData = {
         title: req.body.title,
         description: req.body.description,
         user: userId,
-        image,
       };
+
+      if (req.file) {
+        const imageBuffer = req.file.buffer;
+        const base64Image = imageBuffer.toString('base64');
+        blogData.image = base64Image;
+      }
+
       const response = await this.service.insert(blogData);
-      //   const userResponse = await this.userService.getUserById(userId);
-      //   console.log('userResponse', userResponse);
-      //   response.item.user = userResponse.data;
       return res.status(response.statusCode).send(response);
     } catch (error) {
       return res.status(500).send({
