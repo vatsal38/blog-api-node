@@ -20,11 +20,14 @@ class BlogService extends Service {
           'lastName',
           'phoneNumber',
         ]);
-
+      const blogData = items.map((blog) => ({
+        ...blog._doc,
+        image: blog.image ? `data:image/jpeg;base64,${blog.image}` : null,
+      }));
       return {
         error: false,
         statusCode: 200,
-        data: items,
+        data: blogData,
       };
     } catch (errors) {
       return {
@@ -46,11 +49,14 @@ class BlogService extends Service {
           'lastName',
           'phoneNumber',
         ]);
-
+      const blogData = items.map((blog) => ({
+        ...blog._doc,
+        image: blog.image ? `data:image/jpeg;base64,${blog.image}` : null,
+      }));
       return {
         error: false,
         statusCode: 200,
-        data: items,
+        data: blogData,
       };
     } catch (errors) {
       console.error(errors);
@@ -73,11 +79,14 @@ class BlogService extends Service {
           'lastName',
           'phoneNumber',
         ]);
-
+      const blogData = {
+        ...item._doc,
+        image: item.image ? `data:image/jpeg;base64,${item.image}` : null,
+      };
       return {
         error: false,
         statusCode: 200,
-        data: item,
+        data: blogData,
       };
     } catch (errors) {
       console.error(errors);
@@ -100,7 +109,10 @@ class BlogService extends Service {
           'lastName',
           'phoneNumber',
         ]);
-
+      const blogData = {
+        ...item._doc,
+        image: item.image ? `data:image/jpeg;base64,${item.image}` : null,
+      };
       if (!item) {
         return {
           error: true,
@@ -108,11 +120,10 @@ class BlogService extends Service {
           message: 'Blog not found!',
         };
       }
-
       return {
         error: false,
         statusCode: 200,
-        data: item,
+        data: blogData,
       };
     } catch (errors) {
       return {
