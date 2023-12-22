@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Service from '../Service';
 
 class BlogService extends Service {
@@ -12,22 +13,18 @@ class BlogService extends Service {
   async getAllBlogs() {
     try {
       const items = await this.model
-        .find()
-        .populate('user', [
-          '_id',
-          'username',
-          'firstName',
-          'lastName',
-          'phoneNumber',
-        ]);
-      const blogData = items.map((blog) => ({
-        ...blog._doc,
-        image: blog.image ? `data:image/jpeg;base64,${blog.image}` : null,
-      }));
+        .find({})
+        .populate('user', ['firstName', 'lastName']);
+      // console.log('items', items[0]._doc);
+      // eslint-disable-next-line array-callback-return
+      // const blogData = items.map(blog => {
+      //   // eslint-disable-next-line no-param-reassign
+      //   blog.image = blog.image ? `data:image/jpeg;base64,${blog.image}` : null;
+      // });
       return {
         error: false,
         statusCode: 200,
-        data: blogData,
+        data: items,
       };
     } catch (errors) {
       return {
@@ -42,21 +39,12 @@ class BlogService extends Service {
     try {
       const items = await this.model
         .find({ user: userId })
-        .populate('user', [
-          '_id',
-          'username',
-          'firstName',
-          'lastName',
-          'phoneNumber',
-        ]);
-      const blogData = items.map((blog) => ({
-        ...blog._doc,
-        image: blog.image ? `data:image/jpeg;base64,${blog.image}` : null,
-      }));
+        .populate('user', ['_id', 'username', 'firstName', 'lastName']);
+
       return {
         error: false,
         statusCode: 200,
-        data: blogData,
+        data: items,
       };
     } catch (errors) {
       console.error(errors);
@@ -72,21 +60,12 @@ class BlogService extends Service {
     try {
       const item = await this.model
         .findOne({ _id: blogId })
-        .populate('user', [
-          '_id',
-          'username',
-          'firstName',
-          'lastName',
-          'phoneNumber',
-        ]);
-      const blogData = {
-        ...item._doc,
-        image: item.image ? `data:image/jpeg;base64,${item.image}` : null,
-      };
+        .populate('user', ['_id', 'username', 'firstName', 'lastName']);
+
       return {
         error: false,
         statusCode: 200,
-        data: blogData,
+        data: item,
       };
     } catch (errors) {
       console.error(errors);
@@ -102,17 +81,8 @@ class BlogService extends Service {
     try {
       const item = await this.model
         .findOne({ _id: blogId, user: userId })
-        .populate('user', [
-          '_id',
-          'username',
-          'firstName',
-          'lastName',
-          'phoneNumber',
-        ]);
-      const blogData = {
-        ...item._doc,
-        image: item.image ? `data:image/jpeg;base64,${item.image}` : null,
-      };
+        .populate('user', ['_id', 'username', 'firstName', 'lastName']);
+
       if (!item) {
         return {
           error: true,
@@ -123,7 +93,7 @@ class BlogService extends Service {
       return {
         error: false,
         statusCode: 200,
-        data: blogData,
+        data: item,
       };
     } catch (errors) {
       return {

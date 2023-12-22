@@ -13,7 +13,6 @@ class BlogController extends Controller {
     this.getAllBlogs = this.getAllBlogs.bind(this);
     this.getBlogsByUserId = this.getBlogsByUserId.bind(this);
     this.getBlogsByBlogId = this.getBlogsByBlogId.bind(this);
-    this.userService = new UserService(service);
   }
 
   async createBlog(req, res) {
@@ -30,6 +29,7 @@ class BlogController extends Controller {
       if (req.file) {
         const imageBuffer = req.file.buffer;
         const base64Image = imageBuffer.toString('base64');
+        // blogData.image = `data:image/jpeg;base64,${base64Image}`;
         blogData.image = base64Image;
       }
 
@@ -58,6 +58,7 @@ class BlogController extends Controller {
 
   async getAllBlogs(req, res) {
     const response = await this.service.getAllBlogs();
+    console.log('response', response);
     return res.status(response.statusCode).send(response);
   }
 
