@@ -13,6 +13,9 @@ class Blogs {
           type: String,
           required: [true, 'Description is required.'],
         },
+        image: {
+          type: String,
+        },
         user: {
           type: Schema.Types.ObjectId,
           ref: 'users',

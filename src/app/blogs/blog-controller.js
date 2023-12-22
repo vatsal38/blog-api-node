@@ -19,10 +19,12 @@ class BlogController extends Controller {
   async createBlog(req, res) {
     try {
       const userId = req.user.id;
+      const image = req.file ? req.file.buffer.toString('base64') : null;
       const blogData = {
         title: req.body.title,
         description: req.body.description,
         user: userId,
+        image,
       };
       const response = await this.service.insert(blogData);
       //   const userResponse = await this.userService.getUserById(userId);
