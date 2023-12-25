@@ -17,7 +17,6 @@ class BlogController extends Controller {
 
   async createBlog(req, res) {
     try {
-      console.log('req.body', req.body);
       const userId = req.user.id;
 
       const blogData = {
@@ -30,7 +29,6 @@ class BlogController extends Controller {
         const imageBuffer = req.file.buffer;
         const base64Image = imageBuffer.toString('base64');
         blogData.image = `data:image/jpeg;base64,${base64Image}`;
-        blogData.image = base64Image;
       }
 
       const response = await this.service.insert(blogData);
@@ -58,7 +56,6 @@ class BlogController extends Controller {
 
   async getAllBlogs(req, res) {
     const response = await this.service.getAllBlogs();
-    console.log('response', response);
     return res.status(response.statusCode).send(response);
   }
 

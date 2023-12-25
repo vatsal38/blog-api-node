@@ -15,12 +15,7 @@ class BlogService extends Service {
       const items = await this.model
         .find({})
         .populate('user', ['firstName', 'lastName']);
-      // console.log('items', items[0]._doc);
-      // eslint-disable-next-line array-callback-return
-      // const blogData = items.map(blog => {
-      //   // eslint-disable-next-line no-param-reassign
-      //   blog.image = blog.image ? `data:image/jpeg;base64,${blog.image}` : null;
-      // });
+
       return {
         error: false,
         statusCode: 200,
